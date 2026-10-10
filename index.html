@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Happy Birthday</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@1&family=Playfair+Display:wght@800&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#fff1e6;--bg2:#ffd9c2;--red:#f0173f;--gold:#e8b53a;--heart:#ff4f7b;--txt:#4a2b2b}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden;background:var(--bg1);color:var(--txt);font:italic 1.1rem 'Cormorant Garamond',Georgia,serif;user-select:none}
+.sc{position:fixed;inset:0;opacity:0;pointer-events:none;transition:opacity .9s;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.sc.on{opacity:1;pointer-events:auto}
+#s1{background:radial-gradient(ellipse at 50% 40%,var(--bg1),var(--bg2));touch-action:none}
+#s3{background:radial-gradient(circle at 20% 30%,#fff8,#0000 30%),radial-gradient(circle at 75% 20%,#fff6,#0000 25%),linear-gradient(160deg,var(--bg1),var(--bg2))}
+#s2{background:radial-gradient(circle at 20% 20%,color-mix(in srgb,var(--red),#fff 28%),var(--red) 55%)}
+.small{font-size:clamp(14px,2.2vmin,19px);letter-spacing:.04em;opacity:.85}
+#s1 .top{position:absolute;top:16%}
+#hint{position:absolute;right:6%;bottom:5%;opacity:.7;letter-spacing:.2em;text-transform:uppercase;font-size:12px}
+/* heart (named like the original code) */
+#hw{position:absolute;left:50%;top:40%;width:min(24vmin,170px);aspect-ratio:1;translate:-50% -50%}
+#hw:before{content:"";position:absolute;inset:-70%;background:radial-gradient(ellipse 60% 55% at 62% 38%,var(--heart) 0%,#0000 70%);opacity:.45;filter:blur(18px)}
+.heart{position:absolute;inset:0;animation:heartBeat 2.6s ease-in-out infinite;transform-origin:50% 55%;filter:drop-shadow(0 8px 14px #e0306a66);transition:transform .35s,opacity .35s}
+.heart.pop{transform:scale(1.7);opacity:0;animation:none}
+@keyframes heartBeat{0%,100%{transform:scale(1)}15%{transform:scale(1.12)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+#lips{position:absolute;left:50%;top:40%;width:min(26vmin,190px);translate:-50% -50%;scale:0;transition:scale .5s cubic-bezier(.3,1.6,.5,1)}
+#lips.on{scale:1}
+#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.sp{position:absolute;width:8px;height:8px;border-radius:50%}
+/* scene 2 */
+#t2{font:800 min(16vw,20vh)/1 'Playfair Display',Georgia,serif;font-style:normal;color:#fff3ee;white-space:pre;text-shadow:0 6px 20px #0003}
+#t2 span{display:inline-block;opacity:0;animation:rise .6s forwards cubic-bezier(.2,.9,.3,1)}
+@keyframes rise{from{opacity:0;transform:translateY(40%)}to{opacity:1;transform:none}}
+#ul{width:min(40vmin,300px);margin:2vh 0}#ul path{stroke:var(--gold);fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:120;stroke-dashoffset:120}
+#s2.on #ul path{animation:dr 1s 1.6s forwards}@keyframes dr{to{stroke-dashoffset:0}}
+#s2 .small{color:#ffe3dc}
+/* scene 3 */
+#cv{position:absolute;inset:0;width:100%;height:100%}
+#t3{position:absolute;left:5vw;bottom:5vh;text-align:left}
+#t3 b{display:block;font:400 clamp(34px,min(11vw,7vw + 2vh),110px)/1.1 'Yellowtail',cursive;color:#c8204a;opacity:0;transition:opacity 1.2s}
+#t3 b.on{opacity:1}#t3 .small{min-height:1.4em}
+@media(max-aspect-ratio:1/1){#t3{left:0;right:0;text-align:center}}
+/* scene 4 */
+#s4{background:#ffeadfee;backdrop-filter:blur(6px);justify-content:flex-start;overflow-y:auto;padding:6vh 0 4vh}
+#s4 h2{font:400 clamp(38px,9vw,72px) 'Yellowtail',cursive;color:#c8204a}
+#msg{max-width:min(640px,88vw);margin:2vh 0;font-size:clamp(18px,2.6vmin,24px);line-height:1.5;white-space:pre-wrap}
+#gal{display:flex;gap:22px;overflow-x:auto;width:100%;padding:24px 8vw;scroll-snap-type:x mandatory}
+.pol{flex:none;width:min(240px,62vw);background:#fff;padding:12px 12px 8px;box-shadow:0 8px 24px #0003;scroll-snap-align:center;transform:rotate(-2deg)}
+.pol:nth-child(even){transform:rotate(2.5deg)}
+.pol img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.pol p{padding:8px 0 2px;font-size:16px;min-height:32px}
+.btn{border:0;border-radius:99px;padding:10px 22px;background:#c8204a;color:#fff;font:inherit;cursor:pointer;margin-top:2vh}
+#rep{position:fixed;left:12px;bottom:12px;z-index:40;width:34px;height:34px;padding:0;margin:0;opacity:.35;display:none}
+#lock{position:fixed;right:10px;bottom:10px;z-index:60;width:28px;height:28px;border-radius:50%;border:0;background:#0002;color:#fff;font-size:12px;opacity:.45;cursor:pointer}
+#pin{position:fixed;inset:0;z-index:70;background:#0008;display:none;align-items:center;justify-content:center}
+#pin div{background:#fff;padding:22px;border-radius:14px;text-align:center;font-style:normal;font-family:system-ui;color:#222}
+#pin input{display:block;margin:12px auto;padding:10px;font-size:22px;width:170px;text-align:center;letter-spacing:.3em;border:1px solid #bbb;border-radius:8px}
+#pin em{display:block;color:#c00;min-height:1.3em;font-size:14px}
+</style></head><body>
+<section class="sc" id="s1"><div class="top small" id="s1_top"></div>
+ <div id="hw"><svg class="heart" viewBox="0 0 100 100"><defs><radialGradient id="hg" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".25" stop-color="var(--heart)"/><stop offset="1" stop-color="#d11b5c"/></radialGradient></defs>
+ <path id="hp" d="M50 92C8 62-2 34 14 17 28 3 45 9 50 24 55 9 72 3 86 17 102 34 92 62 50 92Z" fill="url(#hg)"/><ellipse cx="32" cy="26" rx="9" ry="5" fill="#fff" opacity=".55" transform="rotate(-35 32 26)"/></svg></div>
+ <svg id="lips" viewBox="0 0 100 60"><path d="M6 30C22 8 38 12 50 20 62 12 78 8 94 30 78 54 22 54 6 30Z" fill="#ec4a74"/><path d="M8 30C30 38 70 38 92 30" stroke="#a81c4c" stroke-width="2" fill="none"/><ellipse cx="38" cy="22" rx="9" ry="3" fill="#fff" opacity=".35"/></svg>
+ <svg id="fx"><path id="bw" fill="none" stroke="#4a2b2b" stroke-width="4" stroke-linecap="round"/><polyline id="st" fill="none" stroke="#4a2b2b" stroke-width="1.5"/><g id="ar"></g></svg>
+ <div id="hint"></div></section>
+<section class="sc" id="s2"><div class="small" id="s2_top"></div><div id="t2"></div>
+ <svg id="ul" viewBox="0 0 100 10"><path d="M2 6Q14 0 26 5T50 5 74 5 98 4"/></svg><div class="small" id="s2_sub"></div></section>
+<section class="sc" id="s3"><canvas id="cv"></canvas><div id="t3"><div class="small" id="s3_top"></div><b id="s3_title"></b><div class="small" id="s3_sub"></div></div></section>
+<section class="sc" id="s4"><h2 id="h4"></h2><p id="msg"></p><div id="gal"></div><button class="btn" onclick="play()">↻ replay</button></section>
+<button class="btn" id="rep" onclick="play()">↻</button>
+<button id="lock" title="Admin">●</button>
+<div id="pin"><div><b>Admin PIN</b><input id="pi" type="password" inputmode="numeric" autocomplete="off"><em id="pe"></em><button class="btn" id="po">Enter</button> <button class="btn" style="background:#999" id="pc">Cancel</button></div></div>
+<script>
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DEF={title:'Happy Birthday 🎂',s1_top:'a little something, for you',s1_hint:'pull & release',s2_top:'make a wish...',s2_title:'Happy\nBirthday',s2_sub:'to someone worth celebrating',s3_top:'and... make it count',s3_title:'Happy Birthday',s3_sub:"here's to a year that blooms",msg:'',photos:[],music:'',
+bg1:'#fff1e6',bg2:'#ffd9c2',red:'#f0173f',gold:'#e8b53a',heart:'#ff4f7b',leaf1:'#ff5c8a',leaf2:'#ff9ab5',leaf3:'#ffa42e',trunk:'#4a2b2b',txt:'#4a2b2b'};
+let cfg={...DEF},aud,TM=[],raf,W,H,HC,B,dir,L,maxP,dist,fired,ds=null,pull=0;
+const later=(f,ms)=>TM.push(setTimeout(f,ms)),show=n=>[1,2,3,4].forEach(i=>$('s'+i).classList.toggle('on',i==n||(n==4&&i==3)));
+function apply(){const r=document.documentElement.style;['bg1','bg2','red','gold','heart','txt'].forEach(k=>r.setProperty('--'+k,cfg[k]));document.title=cfg.title;
+ ['s1_top','s2_top','s2_sub','s3_top','s3_sub'].forEach(k=>$(k).textContent=cfg[k]);$('hint').textContent=cfg.s1_hint;$('s3_title').textContent=cfg.s3_title;
+ $('h4').textContent=cfg.s3_title;$('msg').textContent=cfg.msg;$('msg').style.display=cfg.msg?'':'none';
+ $('gal').innerHTML=cfg.photos.map(p=>`<div class="pol"><img src="${esc(p.pv||p.url)}"><p>${esc(p.cap||'')}</p></div>`).join('');
+ if(cfg.music&&(!aud||aud.dataset.u!=cfg.music)){aud=new Audio(cfg.music);aud.loop=true;aud.dataset.u=cfg.music}}
+/* ---- scene 1: bow ---- */
+function geo(){W=innerWidth;H=innerHeight;const r=$('hw').getBoundingClientRect();HC={x:r.left+r.width/2,y:r.top+r.height/2};B={x:W*.2,y:H*.82};
+ const dx=HC.x-B.x,dy=HC.y-B.y;dist=Math.hypot(dx,dy);dir={x:dx/dist,y:dy/dist};L=Math.min(W,H)*.1;maxP=L*1.3;
+ $('ar').innerHTML=`<line x2="${L*1.6}" stroke="#4a2b2b" stroke-width="2.5"/><path d="M${L*1.6} -6L${L*1.6+14} 0L${L*1.6} 6Z" fill="#e0306a"/><path d="M0 0L-8-6M0 0L-8 6M6 0L-2-6M6 0L-2 6" stroke="#e0306a" stroke-width="2"/>`;bow(0)}
+function bow(p,off=0){const px=-dir.y,py=dir.x,t1=[B.x+px*L,B.y+py*L],t2=[B.x-px*L,B.y-py*L],c=[B.x-dir.x*L*.9,B.y-dir.y*L*.9],n=[B.x-dir.x*p,B.y-dir.y*p];
+ $('bw').setAttribute('d',`M${t1}Q${c} ${t2}`);$('st').setAttribute('points',`${t1} ${p<0.01&&off?[B.x,B.y]:n} ${t2}`);
+ $('ar').setAttribute('transform',`translate(${n[0]+dir.x*off} ${n[1]+dir.y*off}) rotate(${Math.atan2(dir.y,dir.x)*180/Math.PI})`)}
+function fire(p){if(p<maxP*.25){pull=0;bow(0);return}fired=1;if(aud)aud.play().catch(()=>{});const trav=dist-(L*1.6-p),t0=performance.now();
+ const step=t=>{const k=Math.min(1,(t-t0)/520);bow(0,trav*k*k);if(k<1)requestAnimationFrame(step);else hit()};requestAnimationFrame(step);$('st').setAttribute('points','')}
+function hit(){$('ar').setAttribute('transform','scale(0)');document.querySelector('.heart').classList.add('pop');$('lips').classList.add('on');sparks();later(()=>{show(2)},1800);later(play2,1900)}
+function sparks(){for(let i=0;i<30;i++){const d=document.createElement('i');d.className='sp';d.style.cssText=`left:${HC.x}px;top:${HC.y}px;background:${[cfg.heart,cfg.gold,'#ff9a3c'][i%3]}`;$('s1').append(d);const a=Math.random()*6.28,v=70+Math.random()*160;
+ d.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${Math.cos(a)*v}px,${Math.sin(a)*v+50}px) scale(.3)`,opacity:0}],{duration:1100+Math.random()*700,easing:'ease-out'}).onfinish=()=>d.remove()}}
+$('s1').addEventListener('pointerdown',e=>{if(!fired&&e.target.id!='lock')ds={x:e.clientX,y:e.clientY}});
+addEventListener('pointermove',e=>{if(!ds||fired)return;pull=Math.max(0,Math.min(maxP,-((e.clientX-ds.x)*dir.x+(e.clientY-ds.y)*dir.y)));bow(pull)});
+addEventListener('pointerup',e=>{if(!ds||fired)return;const m=Math.hypot(e.clientX-ds.x,e.clientY-ds.y);ds=null;fire(m<10?maxP*.85:pull)});
+/* ---- scene 2 ---- */
+function play2(){let i=0;$('t2').innerHTML=cfg.s2_title.split('\n').map(l=>'<div>'+[...l].map(c=>c==' '?' ':`<span style="animation-delay:${.3+(i++)*.07}s">${esc(c)}</span>`).join('')+'</div>').join('');later(()=>{show(3);play3()},4600)}
+/* ---- scene 3: growing heart tree ---- */
+function play3(){const cv=$('cv'),dp=devicePixelRatio||1,w=innerWidth,h=innerHeight,land=w>h*1.1;cv.width=w*dp;cv.height=h*dp;const x=cv.getContext('2d');x.scale(dp,dp);
+ const cx=w*(land?.68:.5),base=h*(land?1.02:.84),cr=Math.min(w*(land?.26:.46),h*.34),L0=h*(land?.24:.2),br=[];let R=1;const rnd=()=>(R=(R*16807)%2147483647)/2147483647;
+ (function g(px,py,a,len,wd,d){const ex=px+Math.cos(a)*len,ey=py+Math.sin(a)*len;br.push({px,py,ex,ey,wd,t0:d*.42,du:.55});if(d<6){const n=d<5&&rnd()<.3?3:2;for(let i=0;i<n;i++)g(ex,ey,a+(i-(n-1)/2)*(.5+rnd()*.3)+(rnd()-.5)*.2,len*(.72+rnd()*.1),wd*.68,d+1)}})(cx,base,-Math.PI/2,L0,Math.max(8,cr*.09),0);
+ const ccx=cx,ccy=base-L0*2.1-cr*.2,lv=[];const cols=[cfg.leaf1,cfg.leaf2,cfg.leaf3];
+ while(lv.length<260){const a=rnd()*2.6-1.3,b=rnd()*2.6-1.3;if((a*a+b*b-1)**3-a*a*b**3<0){const px=ccx+a*cr*.85,py=ccy-b*cr*.85;lv.push({x:px,y:py,s:cr*.085*(.8+rnd()*.5),r:(rnd()-.5)*1.2,c:cols[lv.length%3],d:2.3+Math.max(0,(py-(ccy-cr))/(cr*2))*-0+((1-(py-(ccy-cr))/(cr*2.1))*1.6)+rnd()*.6})}}
+ lv.sort((p,q)=>p.d-q.d);const t0=performance.now(),E=p=>p*p*(3-2*p),O=p=>{const c=1.7;return 1+(c+1)*Math.pow(p-1,3)+c*Math.pow(p-1,2)};cancelAnimationFrame(raf);
+ const tick=n=>{const t=(n-t0)/1000;x.clearRect(0,0,w,h);x.strokeStyle=cfg.trunk;x.lineCap='round';
+  br.forEach(b=>{const p=Math.max(0,Math.min(1,(t-b.t0)/b.du));if(!p)return;const k=E(p);x.lineWidth=b.wd;x.beginPath();x.moveTo(b.px,b.py);x.lineTo(b.px+(b.ex-b.px)*k,b.py+(b.ey-b.py)*k);x.stroke()});
+  lv.forEach(l=>{const p=Math.max(0,Math.min(1,(t-l.d)/.7));if(!p)return;const s=l.s*O(p);x.save();x.translate(l.x,l.y);x.rotate(l.r);x.fillStyle=l.c;x.strokeStyle='#fff5';x.lineWidth=1;x.beginPath();x.moveTo(0,s);x.bezierCurveTo(-s*1.4,-s*.2,-s*.6,-s*1.1,0,-s*.4);x.bezierCurveTo(s*.6,-s*1.1,s*1.4,-s*.2,0,s);x.fill();x.stroke();x.restore()});
+  if(t<6)raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick);
+ const tt=$('s3_top');tt.textContent='';[...cfg.s3_top].forEach((c,i)=>later(()=>tt.textContent+=c,600+i*70));later(()=>$('s3_title').classList.add('on'),900);$('rep').style.display='block';
+ if(cfg.msg||cfg.photos.length)later(()=>show(4),9500)}
+/* ---- control ---- */
+function play(){TM.forEach(clearTimeout);TM=[];cancelAnimationFrame(raf);fired=0;pull=0;ds=null;apply();$('s3_title').classList.remove('on');$('rep').style.display='none';$('gal').scrollLeft=0;
+ document.querySelector('.heart').classList.remove('pop');$('lips').classList.remove('on');show(1);geo()}
+addEventListener('resize',()=>{if(!fired)geo()});
+fetch('config.json?'+Date.now()).then(r=>r.json()).catch(()=>({})).then(c=>{cfg={...DEF,...c};play()});
+/* ---- admin entry ---- */
+$('lock').onclick=()=>{$('pin').style.display='flex';$('pi').value='';$('pe').textContent='';$('pi').focus()};$('pc').onclick=()=>$('pin').style.display='none';
+$('pi').onkeydown=e=>{if(e.key=='Enter')$('po').click()};
+const sha=async t=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+$('po').onclick=async()=>{if(await sha('bday'+$('pi').value)!==(cfg.pinHash||'1bb69ca6103454e017ce3a4e4f255d96a21c9f55b1714195be56cc38a5f7fc4f')){$('pe').textContent='Wrong PIN';return}$('pin').style.display='none';
+ const s=document.createElement('script');s.src='admin.js';s.onload=()=>openAdmin(JSON.parse(JSON.stringify(cfg)),DEF,sha);document.body.append(s)};
+</script></body></html>
